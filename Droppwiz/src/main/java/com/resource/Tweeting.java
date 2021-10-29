@@ -1,7 +1,4 @@
 package com.resource;
-
-
-
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -11,7 +8,7 @@ import twitter4j.conf.ConfigurationBuilder;
 import javax.ws.rs.core.Response;
 
 class Tweeting {
-    public static void sendTweets(String args)throws TwitterException {
+    public static void sendTweets(String args) throws TwitterException {
 
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true)

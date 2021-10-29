@@ -13,23 +13,21 @@ import javax.ws.rs.core.Response;
 @Path("/api/1.0/twitter")
 public class TweetMain {
     @POST
-    @Path("/tweet")
+    @Path("/sendTweet")
     public Response sendTweet(PostReq postReq) throws TwitterException {
         String tweets = postReq.getMessage();
         if(StringUtils.isEmpty(tweets)){
             return Response.status(400,"Field is empty").build();
-
         }
         else {
             Tweeting.sendTweets(tweets);
         }
-            return Response.status(200,"Success").build();
-
+        return Response.status(200,"Success").build();
     }
 
 
     @GET
-    @Path("/timeline")
+    @Path("/getTimeline")
     public String[] timeline() throws TwitterException
     {
         int size= FetchTweets.latestTweet().length;
