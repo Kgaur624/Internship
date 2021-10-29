@@ -3,8 +3,6 @@ package com.resource;
 
 import org.apache.commons.lang3.StringUtils;
 import twitter4j.TwitterException;
-
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -14,6 +12,7 @@ import javax.ws.rs.core.Response;
 public class TweetMain {
     @POST
     @Path("/sendTweet")
+
     public Response sendTweet(PostReq postReq) throws TwitterException {
         String tweets = postReq.getMessage();
         if(StringUtils.isEmpty(tweets)){
@@ -30,7 +29,7 @@ public class TweetMain {
     @Path("/getTimeline")
     public String[] timeline() throws TwitterException
     {
-        int size= FetchTweets.latestTweet().length;
+        int size=  FetchTweets.latestTweet().length;
         String arr[]=new String[size];
         int i=0;
         for(String s: FetchTweets.latestTweet())
