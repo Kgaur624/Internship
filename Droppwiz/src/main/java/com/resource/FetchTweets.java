@@ -9,8 +9,10 @@ package com.resource;
         import twitter4j.TwitterFactory;
         import twitter4j.conf.ConfigurationBuilder;
         import java.util.List;
-    class RetrieveTweets {
+    class FetchTweets {
     public  static  String[] latestTweet() throws TwitterException {
+        int size;
+        String arr[] ;
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true)
                 .setOAuthConsumerKey("jUw2qaXkcqirbpR0h76dGQPEb")
@@ -20,14 +22,18 @@ package com.resource;
         TwitterFactory tf = new TwitterFactory(cb.build());
         Twitter twitter = tf.getInstance();
         List<Status> statuses = twitter.getHomeTimeline();
+       size = statuses.size();
+        arr=new String[size];
         System.out.println("Showing home timeline.");
-        String ar[]=new String[statuses.size()];
         int i=0;
         for (Status status1 : statuses)
         {
-            ar[i]=status1.getText();
+            arr[i]=status1.getText();
             i++;
         }
-        return ar;
+        if (size == 0){
+            arr[0] = "No Tweet Found ";
+        }
+        return arr;
     }
 }
