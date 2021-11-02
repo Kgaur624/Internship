@@ -3,13 +3,11 @@ package com.resource;
 class PostReq {
 
     String message;
-    public String getMessage()
-    {
+
+    public String getMessage() {
         return message;
     }
-    public void setMessage(String message) {
-        this.message = message;
-    }
+
 }
 
 
