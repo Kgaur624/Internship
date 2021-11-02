@@ -21,7 +21,7 @@ package com.resource;
         List<Status> statuses = twitter.getHomeTimeline();
        size = statuses.size();
         arr=new String[size];
-        System.out.println("Showing home timeline.");
+      //  System.out.println("Showing home timeline.");
         int i=0;
         for (Status status1 : statuses)
         {

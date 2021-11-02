@@ -12,7 +12,6 @@ import javax.ws.rs.core.Response;
 public class TweetMain {
     @POST
     @Path("/sendTweet")
-
     public Response sendTweet(PostReq postReq) throws TwitterException {
         String tweets = postReq.getMessage();
         if(StringUtils.isEmpty(tweets)){
