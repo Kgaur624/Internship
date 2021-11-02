@@ -5,10 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6e0891c1-7cba-4b64-9246-736dcb505275" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/resource/FetchTweets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/resource/FetchTweets.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/resource/PostReq.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/resource/PostReq.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/resource/TweetMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/resource/TweetMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/resource/Tweeting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/resource/Tweeting.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RestApi/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../RestApi/.idea/compiler.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../RestApi/.idea/jarRepositories.xml" beforeDir="false" />
@@ -110,7 +106,7 @@
       <workItem from="1635696437149" duration="308000" />
       <workItem from="1635821782649" duration="94000" />
       <workItem from="1635821890698" duration="219000" />
-      <workItem from="1635824622809" duration="2197000" />
+      <workItem from="1635824622809" duration="2789000" />
     </task>
     <servers />
   </component>
