@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6e0891c1-7cba-4b64-9246-736dcb505275" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/resource/FetchTweets.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/resource/FetchTweets.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/resource/PostReq.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/resource/PostReq.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/resource/TweetMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/resource/TweetMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/resource/Tweeting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/resource/Tweeting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/src/main/java/com/config/CConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/src/main/java/com/resource/Mainn.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/src/main/java/com/resource/ReteriveTweets.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/src/main/java/com/resource/Tweeting.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/src/main/java/com/twt/Runner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/src/main/resources/local_properties.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/target/Droppwiz-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/target/classes/com/config/CConfiguration.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/target/classes/com/resource/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/target/classes/com/resource/RetrieveTweets.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/target/classes/com/resource/Tweeting.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/target/classes/com/twt/Runner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/target/classes/local_properties.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RestApi/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="204jPeGImEwHWbGS2rVy3F08oP4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.config" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Runner" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.twt.Runner" />
+      <module name="Droppwiz" />
+      <option name="PROGRAM_PARAMETERS" value="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.twt.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Runner" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6e0891c1-7cba-4b64-9246-736dcb505275" name="Changes" comment="" />
+      <created>1635310733756</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1635310733756</updated>
+      <workItem from="1635310735169" duration="12202000" />
+      <workItem from="1635416047942" duration="2438000" />
+      <workItem from="1635442129894" duration="11000" />
+      <workItem from="1635478476631" duration="13744000" />
+      <workItem from="1635506627243" duration="3331000" />
+      <workItem from="1635696437149" duration="308000" />
+      <workItem from="1635821782649" duration="94000" />
+      <workItem from="1635821890698" duration="219000" />
+      <workItem from="1635824622809" duration="2197000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
