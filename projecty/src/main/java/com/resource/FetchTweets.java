@@ -11,14 +11,23 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 
-class FetchTweets {
-    public static Response latestTweet() throws TwitterException {
+public class FetchTweets {
+    //DropWizardConfiguration dropWizardConfiguration;
+//    public FetchTweets(DropWizardConfiguration dropWizardConfiguration){
+//        this.dropWizardConfiguration=dropWizardConfiguration;
+//    }
+//    public  FetchTweets()
+//    {
+//
+//    }
+    public  Response latestTweet() throws TwitterException {
+
         List<String> list = new ArrayList<String>();
+        DropWizardConfiguration dropWizardConfiguration = null;
+        ConfigurationBuilder configurationBuilder = dropWizardConfiguration.getConfigurationObject();
 
-        ConfigurationBuilder configurationBuilder = DropWizardConfiguration.getConfigurationObject();
-
-        TwitterFactory tf = new TwitterFactory(configurationBuilder.build());
-        Twitter twitter = tf.getInstance();
+        TwitterFactory twitterFactory = new TwitterFactory(configurationBuilder.build());
+        Twitter twitter = twitterFactory.getInstance();
         List<Status> statuses = twitter.getHomeTimeline();
         for (Status status : statuses) {
             list.add(status.getText());

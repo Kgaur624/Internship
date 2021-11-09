@@ -1,9 +1,12 @@
 
 package com.resource;
 
-class PostReq {
+public class PostReq {
 
-    String message;
+    String message ;
+    public  void  setMessage(String message){
+        this.message = message;
+    }
     public String getMessage()
     {
         return message;
