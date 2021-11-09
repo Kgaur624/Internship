@@ -8,12 +8,21 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
-class Tweeting {
-    public static Status sendTweets(String args)  {
-
-        ConfigurationBuilder configurationBuilder = DropWizardConfiguration.getConfigurationObject();
-        TwitterFactory tf = new TwitterFactory(configurationBuilder.build());
-        Twitter twitter = tf.getInstance();
+public class Tweeting {
+//    DropWizardConfiguration dropWizardConfiguration;
+//    public Tweeting(DropWizardConfiguration dropWizardConfiguration)
+//    {
+//        this.dropWizardConfiguration=dropWizardConfiguration;
+//    }
+//    public Tweeting()
+//    {
+//
+//    }
+    public  Status sendTweets(String args) throws NullPointerException {
+        DropWizardConfiguration dropWizardConfiguration = null;
+        ConfigurationBuilder configurationBuilder = dropWizardConfiguration.getConfigurationObject();
+        TwitterFactory twitterFactory = new TwitterFactory(configurationBuilder.build());
+        Twitter twitter = twitterFactory.getInstance();
         Status status = null;
         try {
             status = twitter.updateStatus(args);

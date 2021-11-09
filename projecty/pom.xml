@@ -24,13 +24,13 @@
         <version>2.25</version>
     </dependency>
         <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+
         <dependency>
             <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>4.0.0</version>
+            <artifactId>mockito-inline</artifactId>
+            <version>3.8.0</version>
             <scope>test</scope>
         </dependency>
-
 
     </dependencies>
 
