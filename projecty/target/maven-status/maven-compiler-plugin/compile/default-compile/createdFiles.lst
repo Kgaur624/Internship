@@ -1,6 +1,0 @@
-com/config/DropWizardConfiguration.class
-com/resource/TweetController.class
-com/resource/FetchTweets.class
-com/resource/PostReq.class
-com/twt/Runner.class
-com/resource/Tweeting.class
