@@ -1,4 +1,5 @@
-package com.test;
+package org.com.test;
+
 
 import com.resource.PostReq;
 import com.resource.TweetController;
@@ -6,8 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
-import javax.ws.rs.core.Response;
 
+import javax.ws.rs.core.Response;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TweetControllerTest {
