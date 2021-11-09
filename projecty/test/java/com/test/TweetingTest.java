@@ -2,9 +2,7 @@ package com.test;
 import com.config.DropWizardConfiguration;
 import com.resource.PostReq;
 import com.resource.Tweeting;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
@@ -19,12 +17,10 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class TweetingTest {
     Tweeting tweeting;
-    DropWizardConfiguration dropWizardConfiguration;
     PostReq postReq;
-    MockedStatic<DropWizardConfiguration> dropWizardConfigurationMockitoStatic = Mockito.mockStatic(DropWizardConfiguration.class);
     @Before
     public void setUp() throws Exception {
-        dropWizardConfiguration = Mockito.mock(DropWizardConfiguration.class);
+        tweeting = new Tweeting();
          postReq = new PostReq();
 
     }
@@ -32,12 +28,15 @@ public class TweetingTest {
     @Test
     public void sendTweetTest() throws TwitterException {
         postReq.setMessage("Kartik");
-        String expectedTweet = "KARTIK";
-        dropWizardConfigurationMockitoStatic.when(DropWizardConfiguration::getConfigurationObject).thenReturn(new ConfigurationBuilder());
+        String expectedTweet = postReq.getMessage();
 
-        String str = "KARTIK";
-        when(postReq.getMessage()).thenReturn(str);
-        Status status = tweeting.sendTweets(expectedTweet);
+        Status status = null ;
+        try {
+            status = tweeting.sendTweets(expectedTweet);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         String actualTweet = status.getText();
         assertEquals(expectedTweet, actualTweet);
 
@@ -45,12 +44,9 @@ public class TweetingTest {
 
     @Test
     public void NoTweetSend() {
-        dropWizardConfigurationMockitoStatic.when(DropWizardConfiguration::getConfigurationObject).thenReturn(new ConfigurationBuilder());
-
         postReq.setMessage("");
         String expectedTweet = postReq.getMessage();
-        Status status = null;
-        status = tweeting.sendTweets(expectedTweet);
+        Status status = tweeting.sendTweets(expectedTweet);
         int expectedLength = 0;
         int actuallength = 0;
         String actualTweet = "";
@@ -67,4 +63,6 @@ public class TweetingTest {
 
         Assert.assertEquals(expectedLength, actuallength);
     }
+
+
 }

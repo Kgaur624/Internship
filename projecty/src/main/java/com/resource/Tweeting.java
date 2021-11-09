@@ -19,7 +19,7 @@ public class Tweeting {
 //
 //    }
     public  Status sendTweets(String args) throws NullPointerException {
-        DropWizardConfiguration dropWizardConfiguration = null;
+        DropWizardConfiguration dropWizardConfiguration = new DropWizardConfiguration();
         ConfigurationBuilder configurationBuilder = dropWizardConfiguration.getConfigurationObject();
         TwitterFactory twitterFactory = new TwitterFactory(configurationBuilder.build());
         Twitter twitter = twitterFactory.getInstance();
