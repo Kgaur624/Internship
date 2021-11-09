@@ -1,4 +1,4 @@
-package com.test;
+package org.com.test;
 import com.config.DropWizardConfiguration;
 import com.resource.PostReq;
 import com.resource.Tweeting;

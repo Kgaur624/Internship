@@ -1,60 +1,93 @@
-package com.test;
+package org.com.test;
 
-import com.config.DropWizardConfiguration;
 import com.resource.FetchTweets;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import twitter4j.Status;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
+import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
 
+import javax.validation.constraints.AssertTrue;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FetchTweetsTest {
-    DropWizardConfiguration dropWizardConfiguration;
+    // declaration
+    ConfigurationBuilder configurationBuilder;
+    TwitterFactory twitterFactory;
     FetchTweets fetchTweets;
-    MockedStatic<DropWizardConfiguration> dropWizardConfigurationMockitoStatic = Mockito.mockStatic(DropWizardConfiguration.class);
     Twitter twitter;
+
     @Before
     public void setUp() {
-        dropWizardConfiguration = Mockito.mock(DropWizardConfiguration.class);
+        // initialization
+        configurationBuilder = mock(ConfigurationBuilder.class);
+        twitterFactory = mock(TwitterFactory.class);
+        twitter = mock(Twitter.class);
+        fetchTweets = new FetchTweets(configurationBuilder, twitterFactory);
     }
 
     @Test
-    public void fetchTweetTest() throws TwitterException {
-        List<String> arrayList = new ArrayList<>();
-        dropWizardConfigurationMockitoStatic.when(DropWizardConfiguration::getConfigurationObject).thenReturn( new ConfigurationBuilder());
+    public void fetchTweetTest_successCase_listIsNotEmpty() throws TwitterException {
 
-        try {
-            twitter = TwitterFactory.getSingleton();
-            List<Status> statuses = twitter.getHomeTimeline();
-            for (Status status : statuses) {
-                arrayList.add(status.getText());
-            }
-        } catch (TwitterException e) {
-            e.printStackTrace();
-        }
-        Response expectedTweet = Response.ok(arrayList).build();
+        Status s0 = mock(Status.class);
+        Status s1 = mock(Status.class);
+        Status s2 = mock(Status.class);
+        when(s0.getText()).thenReturn("s0");
+        when(s1.getText()).thenReturn("s1");
+        when(s2.getText()).thenReturn("s2");
+        ResponseList<Status> responseList = mock(ResponseList.class);
+        when(responseList.size()).thenReturn(3);
+        when(responseList.get(0)).thenReturn(s0);
+        when(responseList.get(1)).thenReturn(s1);
+        when(responseList.get(2)).thenReturn(s2);
+        when(twitterFactory.getInstance()).thenReturn(twitter);
+        when(twitter.getHomeTimeline()).thenReturn(responseList);
         Response actualTweet = fetchTweets.latestTweet();
-        Assert.assertEquals(expectedTweet.getLength(), actualTweet.getLength());
+
+        ArrayList<String> actualList = (ArrayList<String>) actualTweet.getEntity();
+        Assert.assertEquals(Arrays.asList("s0", "s1", "s2"), actualList);
     }
 
+    @Test
+    public void fetchTweetTest_successCase_listIsEmpty() throws TwitterException {
+
+        ResponseList<Status> responseList = mock(ResponseList.class);
+        when(responseList.size()).thenReturn(0);
+        when(twitterFactory.getInstance()).thenReturn(twitter);
+        when(twitter.getHomeTimeline()).thenReturn(responseList);
+        Response actualTweet = fetchTweets.latestTweet();
+
+        ArrayList<String> actualList = (ArrayList<String>) actualTweet.getEntity();
+        Assert.assertEquals(Arrays.asList("No Tweet Found "), actualList);
+    }
+
+    @Test
+    public void fetchTweetTest_exceptionCase_throwsTwitterException() throws TwitterException {
+
+        when(twitterFactory.getInstance()).thenReturn(twitter);
+        when(twitter.getHomeTimeline()).thenThrow(TwitterException.class);
+        String expectedError = "";
+        try {
+            fetchTweets.latestTweet();
+        } catch (RuntimeException e) {
+            expectedError = e.getMessage();
+        }
+        Assert.assertTrue(expectedError.equalsIgnoreCase("Run time error"));
+    }
+
+/*
     @Test
     public void fetchTweetTestNot() throws TwitterException {
 
         List<String> arrayList = new ArrayList<>();
-        dropWizardConfigurationMockitoStatic.when(DropWizardConfiguration::getConfigurationObject).thenReturn( new ConfigurationBuilder());
 
         try {
             twitter = TwitterFactory.getSingleton();
@@ -74,7 +107,6 @@ public class FetchTweetsTest {
     public void fetchTweetTestLower() throws TwitterException {
 
         List<String> arrayList = new ArrayList<>();
-        dropWizardConfigurationMockitoStatic.when(DropWizardConfiguration::getConfigurationObject).thenReturn( new ConfigurationBuilder());
 
         try {
             twitter = TwitterFactory.getSingleton();
@@ -97,7 +129,6 @@ public class FetchTweetsTest {
         List<String> arrayList = new ArrayList<>();
 
       // ConfigurationBuilder configurationBuilder = DropWizardConfiguration.getConfigurationObject();
-        dropWizardConfigurationMockitoStatic.when(DropWizardConfiguration::getConfigurationObject).thenReturn( new ConfigurationBuilder());
 
         try {
             twitter = TwitterFactory.getSingleton();
@@ -116,8 +147,8 @@ public class FetchTweetsTest {
 
     @After
     public void close(){
-        dropWizardConfigurationMockitoStatic.close();
     }
+*/
 
 
 }
