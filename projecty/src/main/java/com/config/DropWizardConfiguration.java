@@ -14,5 +14,4 @@ public class DropWizardConfiguration extends Configuration {
                 .setOAuthAccessTokenSecret("ao2D4h0PhFUzahxDLLwSxYNYWh58I6u15GtugJ7fFVxd5");
         return  configurationBuilder;
     }
-
 }
