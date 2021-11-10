@@ -1,0 +1,191 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > FetchTweetsTest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.testCoverage</a>
+</div>
+
+<h1>Coverage Summary for Class: FetchTweetsTest (com.testCoverage)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FetchTweetsTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97.2%
+  </span>
+  <span class="absValue">
+    (35/36)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.testCoverage;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import com.resource.resource.FetchTweets;
+<i class="no-highlight">4</i>&nbsp;import org.junit.Assert;
+<i class="no-highlight">5</i>&nbsp;import org.junit.Before;
+<i class="no-highlight">6</i>&nbsp;import org.junit.Test;
+<i class="no-highlight">7</i>&nbsp;import org.junit.runner.RunWith;
+<i class="no-highlight">8</i>&nbsp;import org.mockito.junit.MockitoJUnitRunner;
+<i class="no-highlight">9</i>&nbsp;import twitter4j.*;
+<i class="no-highlight">10</i>&nbsp;import twitter4j.conf.ConfigurationBuilder;
+<i class="no-highlight">11</i>&nbsp;
+<i class="no-highlight">12</i>&nbsp;
+<i class="no-highlight">13</i>&nbsp;import javax.ws.rs.core.Response;
+<i class="no-highlight">14</i>&nbsp;import java.util.ArrayList;
+<i class="no-highlight">15</i>&nbsp;import java.util.Arrays;
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;import static org.mockito.Mockito.mock;
+<i class="no-highlight">18</i>&nbsp;import static org.mockito.Mockito.when;
+<i class="no-highlight">19</i>&nbsp;
+<i class="no-highlight">20</i>&nbsp;@RunWith(MockitoJUnitRunner.class)
+<b class="fc"><i class="no-highlight">21</i>&nbsp;public class FetchTweetsTest {</b>
+<i class="no-highlight">22</i>&nbsp;    // declaration
+<i class="no-highlight">23</i>&nbsp;    ConfigurationBuilder configurationBuilder;
+<i class="no-highlight">24</i>&nbsp;    TwitterFactory twitterFactory;
+<i class="no-highlight">25</i>&nbsp;    FetchTweets fetchTweets;
+<i class="no-highlight">26</i>&nbsp;    Twitter twitter;
+<i class="no-highlight">27</i>&nbsp;
+<i class="no-highlight">28</i>&nbsp;    @Before
+<i class="no-highlight">29</i>&nbsp;    public void setUp() {
+<i class="no-highlight">30</i>&nbsp;        // initialization
+<b class="fc"><i class="no-highlight">31</i>&nbsp;        configurationBuilder = mock(ConfigurationBuilder.class);</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;        twitterFactory = mock(TwitterFactory.class);</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;        twitter = mock(Twitter.class);</b>
+<b class="fc"><i class="no-highlight">34</i>&nbsp;        fetchTweets = new FetchTweets(configurationBuilder, twitterFactory);</b>
+<i class="no-highlight">35</i>&nbsp;    }
+<i class="no-highlight">36</i>&nbsp;
+<i class="no-highlight">37</i>&nbsp;    @Test
+<i class="no-highlight">38</i>&nbsp;    public void fetchTweetTest_successCase_listIsNotEmpty() throws TwitterException {
+<i class="no-highlight">39</i>&nbsp;
+<b class="fc"><i class="no-highlight">40</i>&nbsp;        Status s0 = mock(Status.class);</b>
+<b class="fc"><i class="no-highlight">41</i>&nbsp;        Status s1 = mock(Status.class);</b>
+<b class="fc"><i class="no-highlight">42</i>&nbsp;        Status s2 = mock(Status.class);</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;        when(s0.getText()).thenReturn(&quot;s0&quot;);</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;        when(s1.getText()).thenReturn(&quot;s1&quot;);</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        when(s2.getText()).thenReturn(&quot;s2&quot;);</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        ResponseList&lt;Status&gt; responseList = mock(ResponseList.class);</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;        when(responseList.size()).thenReturn(3);</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        when(responseList.get(0)).thenReturn(s0);</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;        when(responseList.get(1)).thenReturn(s1);</b>
+<b class="fc"><i class="no-highlight">50</i>&nbsp;        when(responseList.get(2)).thenReturn(s2);</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;        when(twitterFactory.getInstance()).thenReturn(twitter);</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        when(twitter.getHomeTimeline()).thenReturn(responseList);</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;        Response actualTweet = fetchTweets.latestTweet();</b>
+<i class="no-highlight">54</i>&nbsp;
+<b class="fc"><i class="no-highlight">55</i>&nbsp;        ArrayList&lt;String&gt; actualList = (ArrayList&lt;String&gt;) actualTweet.getEntity();</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;        Assert.assertEquals(Arrays.asList(&quot;s0&quot;, &quot;s1&quot;, &quot;s2&quot;), actualList);</b>
+<i class="no-highlight">57</i>&nbsp;    }
+<i class="no-highlight">58</i>&nbsp;
+<i class="no-highlight">59</i>&nbsp;    @Test
+<i class="no-highlight">60</i>&nbsp;    public void fetchTweetTest_successCase_listIsEmpty() throws TwitterException {
+<i class="no-highlight">61</i>&nbsp;
+<b class="fc"><i class="no-highlight">62</i>&nbsp;        ResponseList&lt;Status&gt; responseList = mock(ResponseList.class);</b>
+<b class="fc"><i class="no-highlight">63</i>&nbsp;        when(responseList.size()).thenReturn(0);</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;        when(twitterFactory.getInstance()).thenReturn(twitter);</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;        when(twitter.getHomeTimeline()).thenReturn(responseList);</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;        Response actualTweet = fetchTweets.latestTweet();</b>
+<i class="no-highlight">67</i>&nbsp;
+<b class="fc"><i class="no-highlight">68</i>&nbsp;        ArrayList&lt;String&gt; actualList = (ArrayList&lt;String&gt;) actualTweet.getEntity();</b>
+<b class="fc"><i class="no-highlight">69</i>&nbsp;        Assert.assertEquals(Arrays.asList(&quot;No Tweet Found &quot;), actualList);</b>
+<i class="no-highlight">70</i>&nbsp;    }
+<i class="no-highlight">71</i>&nbsp;
+<i class="no-highlight">72</i>&nbsp;    @Test
+<i class="no-highlight">73</i>&nbsp;    public void fetchTweetTest_exceptionCase_throwsTwitterException() throws TwitterException {
+<i class="no-highlight">74</i>&nbsp;
+<b class="fc"><i class="no-highlight">75</i>&nbsp;        when(twitterFactory.getInstance()).thenReturn(twitter);</b>
+<b class="fc"><i class="no-highlight">76</i>&nbsp;        when(twitter.getHomeTimeline()).thenThrow(TwitterException.class);</b>
+<b class="fc"><i class="no-highlight">77</i>&nbsp;        String expectedError = &quot;&quot;;</b>
+<i class="no-highlight">78</i>&nbsp;        try {
+<b class="fc"><i class="no-highlight">79</i>&nbsp;            fetchTweets.latestTweet();</b>
+<b class="fc"><i class="no-highlight">80</i>&nbsp;        } catch (RuntimeException e) {</b>
+<b class="fc"><i class="no-highlight">81</i>&nbsp;            expectedError = e.getMessage();</b>
+<b class="nc"><i class="no-highlight">82</i>&nbsp;        }</b>
+<b class="fc"><i class="no-highlight">83</i>&nbsp;        Assert.assertTrue(expectedError.equalsIgnoreCase(&quot;Run time error&quot;));</b>
+<i class="no-highlight">84</i>&nbsp;    }
+<i class="no-highlight">85</i>&nbsp;
+<i class="no-highlight">86</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-11-10 12:15</div>
+</div>
+</body>
+</html>

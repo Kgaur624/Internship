@@ -1,27 +1,27 @@
-package org.com.test;
-import com.config.DropWizardConfiguration;
-import com.resource.PostReq;
-import com.resource.Tweeting;
+import com.resource.resource.FetchTweets;
+import com.resource.resource.PostReq;
+import com.resource.resource.Tweeting;
 import org.junit.*;
 import org.junit.runner.RunWith;
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import twitter4j.Status;
 import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
-import org.mockito.MockedStatic;
+
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TweetingTest {
+    ConfigurationBuilder configurationBuilder;
+    TwitterFactory twitterFactory;
     Tweeting tweeting;
     PostReq postReq;
     @Before
     public void setUp() throws Exception {
         tweeting = new Tweeting();
          postReq = new PostReq();
+        tweeting = new Tweeting(configurationBuilder, twitterFactory);
 
     }
 
