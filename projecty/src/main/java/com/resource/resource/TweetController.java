@@ -37,7 +37,7 @@ public class TweetController {
     @GET
     @Path("/getTimeline")
     public Response timeline() throws TwitterException {
-        FetchTweets fetchTweets = null;
+        FetchTweets fetchTweets = new FetchTweets();
         return fetchTweets.latestTweet();
 
     }

@@ -1,4 +1,4 @@
-package com.testCoverage;
+package testCoverage.com.testCoverage;
 
 import com.resource.resource.FetchTweets;
 import org.junit.Assert;

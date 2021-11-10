@@ -11,21 +11,17 @@ import twitter4j.conf.ConfigurationBuilder;
 public class Tweeting {
     ConfigurationBuilder configurationBuilder;
     TwitterFactory twitterFactory;
-    public Tweeting() {
-        configurationBuilder = DropWizardConfiguration.getConfigurationObject();
-        twitterFactory = new TwitterFactory(configurationBuilder.build());
+  public Tweeting() {
+    configurationBuilder = DropWizardConfiguration.getConfigurationObject();
+    twitterFactory = new TwitterFactory(configurationBuilder.build());
     }
     public Tweeting(ConfigurationBuilder configurationBuilder, TwitterFactory twitterFactory) {
         this.configurationBuilder = configurationBuilder;
         this.twitterFactory = twitterFactory;
     }
 
-
     public  Status sendTweets(String args) throws NullPointerException {
-        DropWizardConfiguration dropWizardConfiguration = new DropWizardConfiguration();
-        ConfigurationBuilder configurationBuilder = dropWizardConfiguration.getConfigurationObject();
-        TwitterFactory twitterFactory = new TwitterFactory(configurationBuilder.build());
-        Twitter twitter = twitterFactory.getInstance();
+       Twitter twitter = twitterFactory.getInstance();
         Status status = null;
         try {
             status = twitter.updateStatus(args);
