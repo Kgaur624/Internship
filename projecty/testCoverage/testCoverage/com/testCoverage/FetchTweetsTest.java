@@ -8,18 +8,13 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
-
-
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
 @RunWith(MockitoJUnitRunner.class)
 public class FetchTweetsTest {
-    // declaration
     ConfigurationBuilder configurationBuilder;
     TwitterFactory twitterFactory;
     FetchTweets fetchTweets;
@@ -27,7 +22,6 @@ public class FetchTweetsTest {
 
     @Before
     public void setUp() {
-        // initialization
         configurationBuilder = mock(ConfigurationBuilder.class);
         twitterFactory = mock(TwitterFactory.class);
         twitter = mock(Twitter.class);

@@ -24,7 +24,7 @@ public class FetchTweets {
         this.configurationBuilder = configurationBuilder;
         this.twitterFactory = twitterFactory;
     }
-// please return list instead of response object
+
     public  Response latestTweet() {
         List<String> list = new ArrayList<>();
         Twitter twitter = twitterFactory.getInstance();
