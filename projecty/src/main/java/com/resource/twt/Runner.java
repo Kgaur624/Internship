@@ -1,7 +1,8 @@
-package com.twt;
+package com.resource.twt;
 
 import com.config.DropWizardConfiguration;
-import com.resource.TweetController;
+import com.resource.resource.TweetController;
+import com.resource.resource.TweetController;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Environment;
 

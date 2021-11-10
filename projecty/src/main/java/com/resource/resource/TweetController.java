@@ -1,13 +1,8 @@
-package com.resource;
+package com.resource.resource;
 
-
-import com.config.DropWizardConfiguration;
 import org.apache.commons.lang3.StringUtils;
 import twitter4j.Status;
-import twitter4j.Twitter;
 import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
-import twitter4j.conf.ConfigurationBuilder;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -42,7 +37,7 @@ public class TweetController {
     @GET
     @Path("/getTimeline")
     public Response timeline() throws TwitterException {
-        FetchTweets fetchTweets = null;
+        FetchTweets fetchTweets = new FetchTweets();
         return fetchTweets.latestTweet();
 
     }

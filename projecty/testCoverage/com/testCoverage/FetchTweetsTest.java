@@ -1,6 +1,6 @@
-package org.com.test;
+package testCoverage.com.testCoverage;
 
-import com.resource.FetchTweets;
+import com.resource.resource.FetchTweets;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +9,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
 
-import javax.validation.constraints.AssertTrue;
+
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -82,73 +82,5 @@ public class FetchTweetsTest {
         }
         Assert.assertTrue(expectedError.equalsIgnoreCase("Run time error"));
     }
-
-/*
-    @Test
-    public void fetchTweetTestNot() throws TwitterException {
-
-        List<String> arrayList = new ArrayList<>();
-
-        try {
-            twitter = TwitterFactory.getSingleton();
-            List<Status> statuses = twitter.getHomeTimeline();
-            for (Status status : statuses) {
-                arrayList.add(status.getText());
-            }
-        } catch (TwitterException e) {
-            e.printStackTrace();
-        }
-        Response expectedTweet = Response.ok(arrayList).build();
-        Response actualTweet = fetchTweets.latestTweet();
-        Assert.assertNotEquals(expectedTweet.getLength(), actualTweet.getLength());
-    }
-
-    @Test
-    public void fetchTweetTestLower() throws TwitterException {
-
-        List<String> arrayList = new ArrayList<>();
-
-        try {
-            twitter = TwitterFactory.getSingleton();
-            List<Status> statuses = twitter.getHomeTimeline();
-            for (Status status : statuses) {
-                arrayList.add(status.getText());
-            }
-        } catch (TwitterException e) {
-            e.printStackTrace();
-        }
-        Response expectedTweet = Response.ok(arrayList).build();
-        Response actualTweet = fetchTweets.latestTweet();
-        Assert.assertEquals(expectedTweet.toString().toLowerCase()
-                , actualTweet.toString().toLowerCase());
-    }
-
-    @Test
-    public void fetchTweetTestUpper() throws TwitterException {
-
-        List<String> arrayList = new ArrayList<>();
-
-      // ConfigurationBuilder configurationBuilder = DropWizardConfiguration.getConfigurationObject();
-
-        try {
-            twitter = TwitterFactory.getSingleton();
-            List<Status> statuses = twitter.getHomeTimeline();
-            for (Status status : statuses) {
-                arrayList.add(status.getText());
-            }
-        } catch (TwitterException e) {
-            e.printStackTrace();
-        }
-        Response expectedTweet = Response.ok(arrayList).build();
-        Response actualTweet = fetchTweets.latestTweet();
-        Assert.assertEquals(expectedTweet.toString().toLowerCase()
-                , actualTweet.toString().toLowerCase());
-    }
-
-    @After
-    public void close(){
-    }
-*/
-
 
 }

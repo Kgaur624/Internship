@@ -1,4 +1,4 @@
-package com.resource;
+package com.resource.resource;
 
 import com.config.DropWizardConfiguration;
 import twitter4j.Status;
