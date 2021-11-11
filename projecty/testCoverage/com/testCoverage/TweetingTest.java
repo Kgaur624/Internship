@@ -1,4 +1,4 @@
-package testCoverage.com.testCoverage;
+package com.testCoverage;
 import com.resource.resource.PostReq;
 import com.resource.resource.Tweeting;
 import org.junit.*;
