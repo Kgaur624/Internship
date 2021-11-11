@@ -1,6 +1,4 @@
-package testCoverage.com.testCoverage;
-
-import com.resource.resource.FetchTweets;
+package com.testCoverage;
 import com.resource.resource.PostReq;
 import com.resource.resource.Tweeting;
 import org.junit.*;
@@ -11,7 +9,6 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

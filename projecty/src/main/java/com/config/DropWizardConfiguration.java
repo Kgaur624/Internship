@@ -1,17 +1,49 @@
 
 package com.config;
+
 import io.dropwizard.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
 
 public class DropWizardConfiguration extends Configuration {
+
+            String filepath="twitter4j.yml";
+            static String accessTokenSecret="";
+            static String consumerSecret="";
+            static String consumerKey="";
+            static String accessToken="";
+            Properties properties=new Properties();
+            FileInputStream fileInputStream;
+            {
+                try {
+                    fileInputStream = new FileInputStream(filepath);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    properties.load(fileInputStream);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                accessTokenSecret= properties.getProperty("accessTokenSecret");
+                consumerSecret= properties.getProperty("consumerSecret");
+                consumerKey= properties.getProperty("consumerKey");
+                accessToken= properties.getProperty("accessToken");
+            }
     public static ConfigurationBuilder getConfigurationObject()
     {
-        ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-        configurationBuilder.setDebugEnabled(true)
-                .setOAuthConsumerKey("4tTqUsyffNDC8xO1GURSR7ddc")
-                .setOAuthConsumerSecret("AfjdxVTTv9csrw9N7zJmPhoX49lyAN1NZ7PDH7u9z2TNoX18fP")
-                .setOAuthAccessToken("1450680649031962626-KOVT11mRbLxLRii3jBTbgX96wMAQbs")
-                .setOAuthAccessTokenSecret("ao2D4h0PhFUzahxDLLwSxYNYWh58I6u15GtugJ7fFVxd5");
-        return  configurationBuilder;
+                ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+                configurationBuilder.setDebugEnabled(true)
+                        .setOAuthConsumerKey(consumerKey)
+                        .setOAuthConsumerSecret(consumerSecret)
+                        .setOAuthAccessToken(accessToken)
+                        .setOAuthAccessTokenSecret(accessTokenSecret);
+                return configurationBuilder;
+            }
+        }
     }
 }
