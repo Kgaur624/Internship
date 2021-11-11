@@ -7,11 +7,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
-
-
 public class DropWizardConfiguration extends Configuration {
-
-            String filepath="twitter4j.yml";
+            String filepath="twitter4j-example.yaml";
             static String accessTokenSecret="";
             static String consumerSecret="";
             static String consumerKey="";
@@ -45,5 +42,3 @@ public class DropWizardConfiguration extends Configuration {
                 return configurationBuilder;
             }
         }
-    }
-}
