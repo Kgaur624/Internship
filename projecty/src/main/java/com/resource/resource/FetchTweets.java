@@ -1,12 +1,10 @@
 package com.resource.resource;
 
 import com.config.DropWizardConfiguration;
-import twitter4j.Status;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
+import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +12,7 @@ import java.util.List;
 public class FetchTweets {
     ConfigurationBuilder configurationBuilder;
     TwitterFactory twitterFactory;
+    Logger logger= LoggerFactory.getLogger(FetchTweets.class);
 
     public FetchTweets() {
         configurationBuilder = DropWizardConfiguration.getConfigurationObject();
@@ -35,13 +34,15 @@ public class FetchTweets {
                 list.add(statuses.get(i).getText());
             }
             if (list.isEmpty()) {
-                list.add("No Tweet Found ");
+                logger.info("You Have No Tweets On your Timeline");
+                list.add("No Tweet Found On TimeLine");
             }
             return Response.ok(list).build(); //  change this to return list
-        } catch (TwitterException e) {
-            System.out.println(e);
-            // create a custom exception
+
+            } catch (TwitterException e) {
+            logger.error("Error Occur",e);
             throw new RuntimeException("Run time error");
         }
+
     }
 }
