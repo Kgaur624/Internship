@@ -1,7 +1,7 @@
-package com.resource.twt;
+package com.twt;
 
 import com.config.DropWizardConfiguration;
-import com.resource.resource.TweetController;
+import com.resource.TweetController;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Environment;
 import org.slf4j.Logger;
@@ -14,7 +14,7 @@ public class Runner extends Application<DropWizardConfiguration> {
         new Runner().run(args);
     }
     @Override
-    public void run(DropWizardConfiguration DropWizardConfiguration, Environment environment) throws Exception {
+    public void run(DropWizardConfiguration DropWizardConfiguration, Environment environment) {
         environment.jersey().register(new TweetController());
     }
 }

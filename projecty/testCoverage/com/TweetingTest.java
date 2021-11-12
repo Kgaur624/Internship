@@ -1,6 +1,7 @@
+package testCoverage.com;
 
-import com.resource.resource.PostReq;
-import com.resource.resource.Tweeting;
+import com.resource.PostReq;
+import com.service.Tweeting;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;

@@ -1,5 +1,5 @@
-
-import com.resource.resource.FetchTweets;
+package testCoverage.com;
+import com.service.FetchTweets;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,10 +1,8 @@
-package com.resource.resource;
+package com.service;
 
-import com.config.DropWizardConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import twitter4j.Status;
-import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
@@ -13,11 +11,11 @@ public class Tweeting {
     ConfigurationBuilder configurationBuilder;
     TwitterFactory twitterFactory;
     Logger logger = LoggerFactory.getLogger(Tweeting.class);
-
+    Service service;
     public Tweeting() {
-
-        configurationBuilder = DropWizardConfiguration.getConfigurationObject();
-        twitterFactory = new TwitterFactory(configurationBuilder.build());
+     service = new Service();
+        configurationBuilder = service.configuration();
+        twitterFactory = service.twitterFactory();
     }
 
     public Tweeting(ConfigurationBuilder configurationBuilder, TwitterFactory twitterFactory) {
@@ -26,11 +24,10 @@ public class Tweeting {
     }
 
     public Status sendTweets(String args) throws NullPointerException, TwitterException {
-        Twitter twitter = twitterFactory.getInstance();
         Status status = null;
         try {
             if (args.length() != 0)
-                status = twitter.updateStatus(args);
+                status = service.status();
             else
                 status = null;
         } catch (Exception e) {
@@ -40,7 +37,6 @@ public class Tweeting {
             }
         }
         return status;
-
 
     }
 }
