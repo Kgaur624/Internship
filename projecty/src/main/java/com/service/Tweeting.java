@@ -13,7 +13,7 @@ public class Tweeting {
     Logger logger = LoggerFactory.getLogger(Tweeting.class);
     Service service;
     public Tweeting() {
-     service = new Service();
+        service = new Service();
         configurationBuilder = service.configuration();
         twitterFactory = service.twitterFactory();
     }

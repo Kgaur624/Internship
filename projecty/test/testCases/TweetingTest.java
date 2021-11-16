@@ -1,6 +1,5 @@
-package testCoverage.com;
-
 import com.resource.PostReq;
+import com.service.Service;
 import com.service.Tweeting;
 import org.junit.*;
 import org.junit.runner.RunWith;
@@ -21,24 +20,26 @@ public class TweetingTest {
     Tweeting tweeting;
     PostReq postReq;
     Twitter twitter;
+    Service service;
     @Before
-    public void setUp() throws Exception {
+    public void setUp()  {
         configurationBuilder = mock(ConfigurationBuilder.class);
         twitterFactory = mock(TwitterFactory.class);
         postReq = new PostReq();
         twitter = mock(Twitter.class);
-        tweeting = new Tweeting(configurationBuilder, twitterFactory);
-
+        tweeting = new Tweeting();
+       // tweeting = new Tweeting(configurationBuilder, twitterFactory);
+        service = new Service(configurationBuilder,twitterFactory,twitter);
     }
 
     @Test
     public void sendTweetTest() throws TwitterException {
-        Status status ;
+
         Status s0 = mock(Status.class);
         postReq.setMessage("Kartik");
         String expectedTweet = postReq.getMessage();
-        when(twitterFactory.getInstance()).thenReturn(twitter);
-        when(twitter.updateStatus(expectedTweet)).thenReturn(s0);
+        when(service.getTwitterInstance()).thenReturn(twitter);
+        when(service.status()).thenReturn(s0);
         when(s0.getText()).thenReturn("Kartik");
         Status actualTweet = tweeting.sendTweets(expectedTweet);
         assertEquals(s0, actualTweet);
