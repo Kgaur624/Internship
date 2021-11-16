@@ -1,12 +1,11 @@
-package test;
 
-import com.config.DropWizardConfiguration;
 import com.service.FetchTweets;
 import com.service.Service;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
@@ -26,12 +25,16 @@ public class FetchTweetsTest {
 
     @Before
     public void setUp() {
-        fetchTweets = new FetchTweets();
+        service = mock(Service.class);
         configurationBuilder = mock(ConfigurationBuilder.class);
+        when(service.configuration()).thenReturn(configurationBuilder);
         twitterFactory = mock(TwitterFactory.class);
+        when(service.twitterFactory()).thenReturn(twitterFactory);
+        fetchTweets = new FetchTweets(service);
         twitter = mock(Twitter.class);
-        service = new Service(configurationBuilder,twitterFactory,twitter);
-        fetchTweets = new FetchTweets(configurationBuilder, twitterFactory);
+
+      //  service = new Service(configurationBuilder,twitterFactory,twitter);
+      //  fetchTweets = new FetchTweets(configurationBuilder, twitterFactory);
     }
 
 
@@ -58,17 +61,19 @@ public class FetchTweetsTest {
 
     @Test
     public void fetchTweetTest_successCase_listIsEmpty() throws TwitterException {
+        service = mock(Service.class);
         List<Status> list = mock(List.class);
         when(list.size()).thenReturn(0);
         when(service.getTwitterInstance()).thenReturn(twitter);
         when(service.timeline()).thenReturn(list);
         List<String> actualTweet = fetchTweets.latestTweet();
         ArrayList<String> actualList = (ArrayList<String>) actualTweet;
-        Assert.assertEquals(Arrays.asList("No Tweet Found "), actualList);
+        Assert.assertEquals(Arrays.asList(), actualList);
     }
 
     @Test
     public void fetchTweetTest_exceptionCase_throwsTwitterException() throws TwitterException{
+        service = mock(Service.class);
         when(service.getTwitterInstance()).thenReturn(twitter);
         when(service.timeline()).thenThrow(TwitterException.class);
         String expectedError = "";

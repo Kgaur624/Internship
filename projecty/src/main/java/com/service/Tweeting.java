@@ -23,10 +23,12 @@ public class Tweeting {
         this.twitterFactory = twitterFactory;
     }
 
+    //SUT
     public Status sendTweets(String args) throws NullPointerException, TwitterException {
         Status status = null;
         try {
             if (args.length() != 0)
+                //external Dependency
                 status = service.status();
             else
                 status = null;

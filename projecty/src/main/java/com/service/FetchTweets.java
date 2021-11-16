@@ -1,4 +1,5 @@
 package com.service;
+import org.checkerframework.checker.units.qual.C;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
 import org.slf4j.Logger;
@@ -12,8 +13,14 @@ public class FetchTweets {
     Logger logger= LoggerFactory.getLogger(FetchTweets.class);
     Service service;
 
+
     public FetchTweets() {
          service = new Service();
+        configurationBuilder = service.configuration();
+        twitterFactory = service.twitterFactory();
+    }
+    public FetchTweets(Service service){
+        this.service=service;
         configurationBuilder = service.configuration();
         twitterFactory = service.twitterFactory();
     }
@@ -34,10 +41,11 @@ public class FetchTweets {
                 logger.info("You Have No Tweets On your Timeline");
                 list.add("No Tweet Found On TimeLine");
             }
-            return list; //  change this to return list
+           // return list; //  change this to return list
             } catch (TwitterException e) {
             logger.error("Error Occur",e);
-            throw new RuntimeException("Run time error");
+          //  throw new RuntimeException("Run time error");
         }
+        return list;
     }
 }

@@ -29,21 +29,32 @@ public class TweetingTest {
         twitter = mock(Twitter.class);
         tweeting = new Tweeting();
        // tweeting = new Tweeting(configurationBuilder, twitterFactory);
-        service = new Service(configurationBuilder,twitterFactory,twitter);
+       // service = new Service(configurationBuilder,twitterFactory,twitter);
+
     }
 
     @Test
-    public void sendTweetTest() throws TwitterException {
-
-        Status s0 = mock(Status.class);
-        postReq.setMessage("Kartik");
+    public void sendTweetTest_NotEmpty() throws TwitterException {
+        postReq.setMessage("cart");
+        service = mock(Service.class);
+        Status s0 = twitter.updateStatus(postReq.getMessage());
         String expectedTweet = postReq.getMessage();
         when(service.getTwitterInstance()).thenReturn(twitter);
         when(service.status()).thenReturn(s0);
-        when(s0.getText()).thenReturn("Kartik");
         Status actualTweet = tweeting.sendTweets(expectedTweet);
         assertEquals(s0, actualTweet);
+    }
 
+@Test
+    public void sendTweetTest_IsEmpty() throws TwitterException {
+        postReq.setMessage("");
+        service = mock(Service.class);
+        Status s0 = twitter.updateStatus(postReq.getMessage());
+        String expectedTweet = "";
+        when(service.getTwitterInstance()).thenReturn(twitter);
+        when(service.status()).thenReturn(s0);
+        Status actualTweet = tweeting.sendTweets(expectedTweet);
+        assertEquals(s0, actualTweet);
     }
 
 
