@@ -29,26 +29,27 @@ public class FetchTweetsTest {
     @Before
     public void setUp() {
         twitter= mock(Twitter.class);
-        service= mock(Service.class);
+        //service= mock(Service.class);
         s1=mock(Status.class);
         s2=mock(Status.class);
         s3=mock(Status.class);
         responseList=mock(ResponseList.class);
         fetchTweets=new FetchTweets(service);
-
+         twitterFactory = mock(TwitterFactory.class);
+        when(twitterFactory.getInstance()).thenReturn(twitter);
+        service = new Service(twitterFactory);
     }
 
 
     @Test
     public void fetchTweetTest_successCase_listIsNotEmpty() throws TwitterException {
-
+        ResponseList<Status> list = mock(ResponseList.class);
         Status s0 = mock(Status.class);
         Status s1 = mock(Status.class);
         Status s2 = mock(Status.class);
         when(s0.getText()).thenReturn("s0");
         when(s1.getText()).thenReturn("s1");
         when(s2.getText()).thenReturn("s2");
-        ResponseList<Status> list = mock(ResponseList.class);
         when(list.size()).thenReturn(3);
         when(list.get(0)).thenReturn(s0);
         when(list.get(1)).thenReturn(s1);
@@ -62,18 +63,16 @@ public class FetchTweetsTest {
     @Test
     public void fetchTweetTest_successCase_listIsEmpty() throws TwitterException {
 
-        List<Status> list = mock(List.class);
+        ResponseList<Status> list = mock(ResponseList.class);
         when(list.size()).thenReturn(0);
-        when(twitterFactory.getInstance()).thenReturn(twitter);
-        when(twitter.getHomeTimeline()).thenReturn((ResponseList<Status>) list);
+        when(twitter.getHomeTimeline()).thenReturn( list);
         List<String> actualTweet = service.latestTweet();
         ArrayList<String> actualList = (ArrayList<String>) actualTweet;
-        Assert.assertEquals(Arrays.asList(), actualList);
+        Assert.assertEquals(Arrays.asList(""), actualList);
     }
 
     @Test
     public void fetchTweetTest_exceptionCase_throwsTwitterException() throws TwitterException{
-        when(twitterFactory.getInstance()).thenReturn(twitter);
         when(twitter.getHomeTimeline()).thenThrow(TwitterException.class);
         String expectedError = "";
         try {

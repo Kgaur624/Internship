@@ -4,10 +4,7 @@ import com.config.DropWizardConfiguration;
 import com.resource.PostReq;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import twitter4j.Status;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
+import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
 
 import java.util.ArrayList;
@@ -38,7 +35,7 @@ public class Service {
         Status status = null;
         try {
             if (args.length() != 0)
-                status = twitter.updateStatus(postReq.getMessage());
+                status = twitter.updateStatus(args);
             else
                 status = null;
         } catch (Exception e) {
@@ -55,12 +52,13 @@ public class Service {
         List<String> list = new ArrayList<>();
         try {
             List<Status> statuses = twitter.getHomeTimeline();
-            for (Status status : statuses) {
+            for (int i = 0; i < statuses.size(); i++) {
+                Status status = statuses.get(i);
                 list.add(status.getText());
             }
             if (list.isEmpty()) {
                 logger.info("You Have No Tweets On your Timeline");
-                list.add("No Tweet Found On TimeLine");
+                list.add("");
             }
             // return list;
         } catch (TwitterException e) {

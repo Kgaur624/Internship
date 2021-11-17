@@ -23,13 +23,15 @@ public class TweetingTest {
     Service service;
     @Before
     public void setUp()  {
-        service = mock(Service.class);
+     //   service = mock(Service.class);
         configurationBuilder = mock(ConfigurationBuilder.class);
         twitterFactory = mock(TwitterFactory.class);
         postReq = new PostReq();
         twitter = mock(Twitter.class);
         tweeting = new Tweeting(service);
-
+        twitterFactory = mock(TwitterFactory.class);
+        when(twitterFactory.getInstance()).thenReturn(twitter);
+        service = new Service(twitterFactory);
 
     }
 
@@ -38,7 +40,6 @@ public class TweetingTest {
         postReq.setMessage("cart");
         Status s0 = mock(Status.class);
         String expectedTweet = postReq.getMessage();
-        when(twitterFactory.getInstance()).thenReturn(twitter);
         when(twitter.updateStatus(postReq.getMessage())).thenReturn(s0);
         Status actualTweet = service.sendTweets(expectedTweet);
         assertEquals(s0, actualTweet);
