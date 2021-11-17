@@ -23,37 +23,35 @@ public class TweetingTest {
     Service service;
     @Before
     public void setUp()  {
+        service = mock(Service.class);
         configurationBuilder = mock(ConfigurationBuilder.class);
         twitterFactory = mock(TwitterFactory.class);
         postReq = new PostReq();
         twitter = mock(Twitter.class);
-        tweeting = new Tweeting();
-       // tweeting = new Tweeting(configurationBuilder, twitterFactory);
-       // service = new Service(configurationBuilder,twitterFactory,twitter);
+        tweeting = new Tweeting(service);
+
 
     }
 
     @Test
     public void sendTweetTest_NotEmpty() throws TwitterException {
         postReq.setMessage("cart");
-        service = mock(Service.class);
-        Status s0 = twitter.updateStatus(postReq.getMessage());
+        Status s0 = mock(Status.class);
         String expectedTweet = postReq.getMessage();
-        when(service.getTwitterInstance()).thenReturn(twitter);
-        when(service.status()).thenReturn(s0);
-        Status actualTweet = tweeting.sendTweets(expectedTweet);
+        when(twitterFactory.getInstance()).thenReturn(twitter);
+        when(twitter.updateStatus(postReq.getMessage())).thenReturn(s0);
+        Status actualTweet = service.sendTweets(expectedTweet);
         assertEquals(s0, actualTweet);
     }
 
 @Test
     public void sendTweetTest_IsEmpty() throws TwitterException {
         postReq.setMessage("");
-        service = mock(Service.class);
         Status s0 = twitter.updateStatus(postReq.getMessage());
         String expectedTweet = "";
-        when(service.getTwitterInstance()).thenReturn(twitter);
-        when(service.status()).thenReturn(s0);
-        Status actualTweet = tweeting.sendTweets(expectedTweet);
+        when(twitterFactory.getInstance()).thenReturn(twitter);
+        when(twitter.updateStatus(postReq.getMessage())).thenReturn(s0);
+        Status actualTweet = service.sendTweets(expectedTweet);
         assertEquals(s0, actualTweet);
     }
 

@@ -1,7 +1,7 @@
 package com.resource;
 
-import com.service.FetchTweets;
-import com.service.Tweeting;
+
+import com.service.Service;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,9 +18,12 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/api/1.0/twitter")
 public class TweetController {
-    Tweeting tweeting = new Tweeting();
     Logger logger = LoggerFactory.getLogger(TweetController.class);;
-    FetchTweets fetchTweets = new FetchTweets();
+    Service service ;
+
+    public TweetController(){
+        service = new Service();
+    }
 
     @POST
     @Path("/sendTweet")
@@ -30,7 +33,7 @@ public class TweetController {
             logger.error("Field is empty");
             return Response.status(400, "Field is empty").build();
         } else {
-            Status status = tweeting.sendTweets(tweet);
+            Status status = service.sendTweets(tweet);
             if (status.getText().equals(tweet)) {
                 logger.info("Tweet posted Successfully");
                 return Response.status(200, "Tweet posted Successfully").build();
@@ -44,6 +47,6 @@ public class TweetController {
     @GET
     @Path("/getTimeline")
     public List<String> timeline() {
-        return fetchTweets.latestTweet();
+        return service.latestTweet();
     }
 }

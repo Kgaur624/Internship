@@ -1,11 +1,10 @@
 
 import com.service.FetchTweets;
-import com.service.Service;
+import com.service.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
@@ -22,19 +21,21 @@ public class FetchTweetsTest {
     FetchTweets fetchTweets;
     Twitter twitter;
     Service service;
+    ResponseList responseList;
+    Status s1;
+    Status s2;
+    Status s3;
 
     @Before
     public void setUp() {
-        service = mock(Service.class);
-        configurationBuilder = mock(ConfigurationBuilder.class);
-        when(service.configuration()).thenReturn(configurationBuilder);
-        twitterFactory = mock(TwitterFactory.class);
-        when(service.twitterFactory()).thenReturn(twitterFactory);
-        fetchTweets = new FetchTweets(service);
-        twitter = mock(Twitter.class);
+        twitter= mock(Twitter.class);
+        service= mock(Service.class);
+        s1=mock(Status.class);
+        s2=mock(Status.class);
+        s3=mock(Status.class);
+        responseList=mock(ResponseList.class);
+        fetchTweets=new FetchTweets(service);
 
-      //  service = new Service(configurationBuilder,twitterFactory,twitter);
-      //  fetchTweets = new FetchTweets(configurationBuilder, twitterFactory);
     }
 
 
@@ -47,38 +48,36 @@ public class FetchTweetsTest {
         when(s0.getText()).thenReturn("s0");
         when(s1.getText()).thenReturn("s1");
         when(s2.getText()).thenReturn("s2");
-        List<Status> list = mock(List.class);
+        ResponseList<Status> list = mock(ResponseList.class);
         when(list.size()).thenReturn(3);
         when(list.get(0)).thenReturn(s0);
         when(list.get(1)).thenReturn(s1);
         when(list.get(2)).thenReturn(s2);
-        when(service.getTwitterInstance()).thenReturn(twitter);
-        when(service.timeline()).thenReturn(list);
-        List<String> actualTweet = fetchTweets.latestTweet();
+        when(twitter.getHomeTimeline()).thenReturn(list);
+        List<String> actualTweet = service.latestTweet();
         ArrayList<String> actualList = (ArrayList<String>) actualTweet;
         Assert.assertEquals(Arrays.asList("s0", "s1", "s2"), actualList);
     }
 
     @Test
     public void fetchTweetTest_successCase_listIsEmpty() throws TwitterException {
-        service = mock(Service.class);
+
         List<Status> list = mock(List.class);
         when(list.size()).thenReturn(0);
-        when(service.getTwitterInstance()).thenReturn(twitter);
-        when(service.timeline()).thenReturn(list);
-        List<String> actualTweet = fetchTweets.latestTweet();
+        when(twitterFactory.getInstance()).thenReturn(twitter);
+        when(twitter.getHomeTimeline()).thenReturn((ResponseList<Status>) list);
+        List<String> actualTweet = service.latestTweet();
         ArrayList<String> actualList = (ArrayList<String>) actualTweet;
         Assert.assertEquals(Arrays.asList(), actualList);
     }
 
     @Test
     public void fetchTweetTest_exceptionCase_throwsTwitterException() throws TwitterException{
-        service = mock(Service.class);
-        when(service.getTwitterInstance()).thenReturn(twitter);
-        when(service.timeline()).thenThrow(TwitterException.class);
+        when(twitterFactory.getInstance()).thenReturn(twitter);
+        when(twitter.getHomeTimeline()).thenThrow(TwitterException.class);
         String expectedError = "";
         try {
-            fetchTweets.latestTweet();
+            service.latestTweet();
         } catch (NullPointerException e) {
             expectedError = e.getMessage();
         }
