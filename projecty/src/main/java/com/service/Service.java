@@ -21,9 +21,9 @@ public class Service {
     Logger logger = LoggerFactory.getLogger(Tweeting.class);
 
     //use for test case
-    public Service(TwitterFactory twitterFactoryMock) {
-        this.twitterFactory = twitterFactoryMock;
-        this.twitter = twitterFactory.getInstance();
+    public Service(TwitterFactory twitterFactory) {
+        this.twitterFactory = twitterFactory;
+        this.twitter = this.twitterFactory.getInstance();
     }
 
     //use for controller class
