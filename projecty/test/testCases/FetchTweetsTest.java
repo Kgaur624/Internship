@@ -71,7 +71,7 @@ public class FetchTweetsTest {
         Assert.assertEquals(Arrays.asList(""), actualList);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void fetchTweetTest_exceptionCase_throwsTwitterException() throws TwitterException{
         when(twitter.getHomeTimeline()).thenThrow(TwitterException.class);
         String expectedError = "";

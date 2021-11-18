@@ -63,7 +63,7 @@ public class Service {
             // return list;
         } catch (TwitterException e) {
             logger.error("Error Occur", e);
-            //  throw new RuntimeException("Run time error");
+              throw new RuntimeException("Run time error");
         }
         return list;
     }
