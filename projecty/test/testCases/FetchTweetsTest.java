@@ -1,4 +1,5 @@
 
+import ModelClass.TwitterData;
 import com.service.FetchTweets;
 import com.service.*;
 import org.junit.Assert;
@@ -55,9 +56,9 @@ public class FetchTweetsTest {
         when(list.get(1)).thenReturn(s1);
         when(list.get(2)).thenReturn(s2);
         when(twitter.getHomeTimeline()).thenReturn(list);
-        List<String> actualTweet = service.latestTweet();
-        ArrayList<String> actualList = (ArrayList<String>) actualTweet;
-        Assert.assertEquals(Arrays.asList("s0", "s1", "s2"), actualList);
+        List<TwitterData> actualTweet = service.latestTweet();
+        //ArrayList<String> actualList = (ArrayList<String>) actualTweet;
+        Assert.assertEquals(Arrays.asList("s0", "s1", "s2"), actualTweet);
     }
 
     @Test
@@ -66,9 +67,9 @@ public class FetchTweetsTest {
         ResponseList<Status> list = mock(ResponseList.class);
         when(list.size()).thenReturn(0);
         when(twitter.getHomeTimeline()).thenReturn( list);
-        List<String> actualTweet = service.latestTweet();
-        ArrayList<String> actualList = (ArrayList<String>) actualTweet;
-        Assert.assertEquals(Arrays.asList(""), actualList);
+        List<TwitterData> actualTweet = service.latestTweet();
+        //ArrayList<String> actualList = (ArrayList<String>) actualTweet;
+        Assert.assertEquals(Arrays.asList(""), actualTweet);
     }
 
     @Test(expected = RuntimeException.class)
