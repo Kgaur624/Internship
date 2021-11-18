@@ -1,4 +1,4 @@
-package com.resource.resource;
+package com.resource;
 
 public class PostReq {
 
