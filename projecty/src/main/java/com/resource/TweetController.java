@@ -1,6 +1,7 @@
 package com.resource;
 
 
+import ModelClass.TwitterData;
 import com.service.Service;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -46,7 +47,7 @@ public class TweetController {
 
     @GET
     @Path("/getTimeline")
-    public List<String> timeline() {
+    public List<TwitterData> timeline() {
         return service.latestTweet();
     }
 }
