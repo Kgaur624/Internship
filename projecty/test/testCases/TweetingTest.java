@@ -1,3 +1,4 @@
+import ModelClass.TwitterData;
 import com.resource.PostReq;
 import com.service.Service;
 import com.service.Tweeting;
@@ -23,7 +24,7 @@ public class TweetingTest {
     Service service;
     @Before
     public void setUp()  {
-     //   service = mock(Service.class);
+
         configurationBuilder = mock(ConfigurationBuilder.class);
         twitterFactory = mock(TwitterFactory.class);
         postReq = new PostReq();

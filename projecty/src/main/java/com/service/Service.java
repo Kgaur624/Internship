@@ -6,11 +6,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
+
+import javax.ws.rs.InternalServerErrorException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 public class Service {
     ConfigurationBuilder configurationBuilder;
@@ -24,13 +28,20 @@ public class Service {
     Date createdAt = null;
    TwitterData twitterData;
 
-    //use for test case
+    //this constructor is used for test case
     public Service(TwitterFactory twitterFactory) {
         this.twitterFactory = twitterFactory;
         this.twitter = this.twitterFactory.getInstance();
     }
 
-    //use for controller class
+    public Service(TwitterFactory twitterFactory,TwitterData twitterData) {
+        this.twitterFactory = twitterFactory;
+        this.twitterData=twitterData;
+        this.twitter = this.twitterFactory.getInstance();
+    }
+
+
+    //this constructor is used for controller class
     public Service() {
         configurationBuilder = DropWizardConfiguration.getConfigurationObject();
         twitterFactory = new TwitterFactory(configurationBuilder.build());
@@ -59,9 +70,8 @@ public class Service {
         List<TwitterData> list = new ArrayList<>();
         try {
             List<Status> statuses = twitter.getHomeTimeline();
-            for (int i = 0; i < statuses.size(); i++) {
-                Status status = statuses.get(i);
-                profileImageUrl = status.getUser().getProfileImageURL();
+            for (Status status :statuses) {
+                profileImageUrl =  status.getUser().getProfileImageURL();
                 name = status.getUser().getName();
                 twitterHandle =status.getUser().getScreenName();
                 message = status.getText();
@@ -71,11 +81,37 @@ public class Service {
                 twitterData = new TwitterData(message,twitterHandle,name,profileImageUrl,date);
                 list.add(twitterData);
             }
-
         } catch (TwitterException e) {
             logger.error("Error Occur", e);
-            //  throw new RuntimeException("Run time error");
+             throw new RuntimeException("Run time error");
         }
         return list;
+    }
+
+    public List<TwitterData> filterTweet(String filter) throws IllegalArgumentException{
+        List<TwitterData> list= new ArrayList<>();
+        try {
+            List<Status> statuses = twitter.getHomeTimeline();
+            for (int i = 0; i < statuses.size(); i++) {
+                Status status = statuses.get(i);
+                    profileImageUrl = status.getUser().getProfileImageURL();
+                    name = status.getUser().getName();
+                    twitterHandle = status.getUser().getScreenName();
+                    message = status.getText();
+                    createdAt = status.getCreatedAt();
+                    Format dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                    String date = dateFormat.format(createdAt);
+                    twitterData = new TwitterData(message, twitterHandle, name, profileImageUrl, date);
+                    list.add(twitterData);
+                }
+            }
+        catch (TwitterException e) {
+            logger.error("Error Occur", e);
+            e.printStackTrace();
+        }
+        int filterLength=filter.length();
+        CharSequence charSequence=filter.subSequence(0,filterLength);
+        return list.stream().filter(t->t.getMessage().contains(charSequence)).collect(Collectors.toList());
+
     }
 }
