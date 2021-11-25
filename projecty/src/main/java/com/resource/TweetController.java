@@ -1,17 +1,13 @@
 package com.resource;
 
-
-import ModelClass.TwitterData;
+import Model.TwitterData;
 import com.service.Service;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import twitter4j.Status;
 import twitter4j.TwitterException;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -50,4 +46,11 @@ public class TweetController {
     public List<TwitterData> timeline() {
         return service.latestTweet();
     }
+
+    @GET
+    @Path("/filter")
+    public List<TwitterData> filter(@QueryParam("searchKey") String searchKey) {
+        return service.filterTweet(searchKey);
+    }
+
 }

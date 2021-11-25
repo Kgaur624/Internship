@@ -24,7 +24,6 @@ public class ServiceTest extends TestCase {
 
     @Test
     public void testCase_latestTweet_success() throws TwitterException {
-        // finish this test case Kathik
         ResponseList<Status> statuses = mock(ResponseList.class);
         when(twitter.getHomeTimeline()).thenReturn(statuses);
         service.latestTweet();

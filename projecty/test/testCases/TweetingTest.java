@@ -23,7 +23,7 @@ public class TweetingTest {
     Service service;
     @Before
     public void setUp()  {
-     //   service = mock(Service.class);
+
         configurationBuilder = mock(ConfigurationBuilder.class);
         twitterFactory = mock(TwitterFactory.class);
         postReq = new PostReq();

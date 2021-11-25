@@ -1,4 +1,4 @@
-package ModelClass;
+package Model;
 
 public class User {
 
