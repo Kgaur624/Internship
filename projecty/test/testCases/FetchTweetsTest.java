@@ -1,5 +1,5 @@
 
-import ModelClass.TwitterData;
+import Model.TwitterData;
 import com.service.FetchTweets;
 import com.service.*;
 import org.junit.Assert;
@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 import twitter4j.*;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -77,7 +76,6 @@ public class FetchTweetsTest {
         when(list.get(2)).thenReturn(s2);
         when(twitter.getHomeTimeline()).thenReturn(list);
         List<TwitterData> actualTweet = service.latestTweet();
-        //ArrayList<String> actualList = (ArrayList<String>) actualTweet;
         Assert.assertEquals(Arrays.asList("s0", "s1", "s2"), actualTweet);
     }
 
@@ -88,7 +86,6 @@ public class FetchTweetsTest {
         when(list.size()).thenReturn(0);
         when(twitter.getHomeTimeline()).thenReturn( list);
         List<TwitterData> actualTweet = service.latestTweet();
-        //ArrayList<String> actualList = (ArrayList<String>) actualTweet;
         Assert.assertEquals(Arrays.asList(""), actualTweet);
     }
 

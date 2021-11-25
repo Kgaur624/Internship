@@ -1,13 +1,12 @@
 package com.service;
 
-import ModelClass.TwitterData;
+import Model.TwitterData;
 import com.config.DropWizardConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
 
-import javax.ws.rs.InternalServerErrorException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -89,29 +88,12 @@ public class Service {
     }
 
     public List<TwitterData> filterTweet(String filter) throws IllegalArgumentException{
-        List<TwitterData> list= new ArrayList<>();
-        try {
-            List<Status> statuses = twitter.getHomeTimeline();
-            for (int i = 0; i < statuses.size(); i++) {
-                Status status = statuses.get(i);
-                    profileImageUrl = status.getUser().getProfileImageURL();
-                    name = status.getUser().getName();
-                    twitterHandle = status.getUser().getScreenName();
-                    message = status.getText();
-                    createdAt = status.getCreatedAt();
-                    Format dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-                    String date = dateFormat.format(createdAt);
-                    twitterData = new TwitterData(message, twitterHandle, name, profileImageUrl, date);
-                    list.add(twitterData);
-                }
-            }
-        catch (TwitterException e) {
-            logger.error("Error Occur", e);
-            e.printStackTrace();
-        }
-        int filterLength=filter.length();
-        CharSequence charSequence=filter.subSequence(0,filterLength);
-        return list.stream().filter(t->t.getMessage().contains(charSequence)).collect(Collectors.toList());
+        List<TwitterData> list= latestTweet();
+        int len = filter.length();
+        CharSequence charSequence = filter.subSequence(0, len);
+        List<TwitterData> filteredTweets = list.stream().filter(t -> t.getMessage().contains(charSequence)).collect(Collectors.toList());
+        return filteredTweets;
+
 
     }
 }

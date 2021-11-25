@@ -1,4 +1,3 @@
-import ModelClass.TwitterData;
 import com.resource.PostReq;
 import com.service.Service;
 import com.service.Tweeting;

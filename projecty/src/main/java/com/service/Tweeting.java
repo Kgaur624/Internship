@@ -1,6 +1,4 @@
 package com.service;
-
-
 public class Tweeting{
     Service service;
     public Tweeting (){}
