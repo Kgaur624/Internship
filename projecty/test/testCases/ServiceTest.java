@@ -1,9 +1,8 @@
-import com.service.Service;
+import com.service.Services;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import twitter4j.*;
 import static org.mockito.Mockito.mock;
@@ -11,7 +10,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ServiceTest extends TestCase {
-    Service service;
+    Services services;
     Twitter twitter;
 
     @Before
@@ -19,13 +18,13 @@ public class ServiceTest extends TestCase {
         TwitterFactory twitterFactory = mock(TwitterFactory.class);
         twitter = mock(Twitter.class);
         when(twitterFactory.getInstance()).thenReturn(twitter);
-        service = new Service(twitterFactory);
+        services = new Services(twitterFactory);
     }
 
     @Test
     public void testCase_latestTweet_success() throws TwitterException {
         ResponseList<Status> statuses = mock(ResponseList.class);
         when(twitter.getHomeTimeline()).thenReturn(statuses);
-        service.latestTweet();
+        services.latestTweet();
     }
 }

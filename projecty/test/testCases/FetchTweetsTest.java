@@ -1,5 +1,5 @@
 
-import Model.TwitterData;
+import com.Model.TwitterData;
 import com.service.FetchTweets;
 import com.service.*;
 import org.junit.Assert;
@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 import twitter4j.*;
+import java.lang.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,12 +24,10 @@ public class FetchTweetsTest {
     TwitterFactory twitterFactory;
     FetchTweets fetchTweets;
     Twitter twitter;
-    Service service;
+    Services services;
     TwitterData twitterData;
     ResponseList responseList;
     Status s1;
-    Status s2;
-    Status s3;
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
     String twitterHandle="@Kgaur624";
     String name="Kartik";
@@ -48,35 +47,33 @@ public class FetchTweetsTest {
     @Before
     public void setUp() {
         twitter= mock(Twitter.class);
-        s1=mock(Status.class);
-        s2=mock(Status.class);
-        s3=mock(Status.class);
-        responseList=mock(ResponseList.class);
-        fetchTweets=new FetchTweets(service);
+    //    s1=mock(Status.class);
          twitterFactory = mock(TwitterFactory.class);
         when(twitterFactory.getInstance()).thenReturn(twitter);
         twitterData = spy(new TwitterData(message, twitterHandle, name, profileImageUrl, date));
-            twitterData = mock(TwitterData.class);
-        service = new Service(twitterFactory,twitterData);
+        services = new Services(twitterFactory,twitterData);
+        fetchTweets=new FetchTweets(services);
     }
 
 
     @Test
     public void fetchTweetTest_successCase_listIsNotEmpty() throws TwitterException {
         ResponseList<Status> list = mock(ResponseList.class);
-        Status s0 = mock(Status.class);
+        List<TwitterData> listExpected=spy(ArrayList.class);
+        User user=mock(User.class);
         Status s1 = mock(Status.class);
-        Status s2 = mock(Status.class);
-        when(s0.getText()).thenReturn("s0");
-        when(s1.getText()).thenReturn("s1");
-        when(s2.getText()).thenReturn("s2");
-        when(list.size()).thenReturn(3);
-        when(list.get(0)).thenReturn(s0);
-        when(list.get(1)).thenReturn(s1);
-        when(list.get(2)).thenReturn(s2);
+        when(list.size()).thenReturn(1);
+        when(list.get(0)).thenReturn(s1);
+        when(s1.getUser()).thenReturn(user);
+        when(s1.getUser().getProfileImageURL()).thenReturn(profileImageUrl);
+        when(s1.getUser().getName()).thenReturn(name);
+        when(s1.getUser().getScreenName()).thenReturn(twitterHandle);
+        when(s1.getText()).thenReturn(message);
+        when(s1.getCreatedAt()).thenReturn(created);
         when(twitter.getHomeTimeline()).thenReturn(list);
-        List<TwitterData> actualTweet = service.latestTweet();
-        Assert.assertEquals(Arrays.asList("s0", "s1", "s2"), actualTweet);
+        listExpected.add((twitterData));
+        List<TwitterData> actualTweet = services.latestTweet();
+        Assert.assertEquals(listExpected.size(),actualTweet.size());
     }
 
     @Test
@@ -85,8 +82,8 @@ public class FetchTweetsTest {
         ResponseList<Status> list = mock(ResponseList.class);
         when(list.size()).thenReturn(0);
         when(twitter.getHomeTimeline()).thenReturn( list);
-        List<TwitterData> actualTweet = service.latestTweet();
-        Assert.assertEquals(Arrays.asList(""), actualTweet);
+        List<TwitterData> actualTweet = services.latestTweet();
+        Assert.assertEquals(Arrays.asList(), actualTweet);
     }
 
     @Test(expected = RuntimeException.class)
@@ -94,20 +91,21 @@ public class FetchTweetsTest {
         when(twitter.getHomeTimeline()).thenThrow(TwitterException.class);
         String expectedError = "";
         try {
-            service.latestTweet();
+            services.latestTweet();
         } catch (NullPointerException e) {
             expectedError = e.getMessage();
         }
         Assert.assertTrue(expectedError.equalsIgnoreCase("Run time error"));
     }
 
-    @Test
-    public void testCase_fetchFilterTweet_successCase() throws TwitterException{
+   @Test
+    public void testCase_fetchFilterTweet_successCase() throws Exception{
+
         Status s1 = mock(Status.class);
         User user=mock(User.class);
         ResponseList<Status> responseList = mock(ResponseList.class);
-        List<TwitterData> expected=mock(ArrayList.class);
-        when(responseList.size()).thenReturn(1);
+        List<TwitterData> expected=spy(ArrayList.class);
+        when(responseList.size()).thenReturn(0);
         when(responseList.get(0)).thenReturn(s1);
         when(s1.getUser()).thenReturn(user);
         when(s1.getUser().getProfileImageURL()).thenReturn(profileImageUrl);
@@ -116,9 +114,16 @@ public class FetchTweetsTest {
         when(s1.getText()).thenReturn(message);
         when(s1.getCreatedAt()).thenReturn(created);
         when(twitter.getHomeTimeline()).thenReturn(responseList);
-        List<TwitterData> actualList = service.filterTweet("try");
-        Assert.assertEquals(expected,actualList);
+        List<TwitterData> actualList = services.filterTweet("try");
+        Assert.assertEquals(expected.size(),actualList.size());
     }
+
+
+
+
+
+
+
 
 
 }
