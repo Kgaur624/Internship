@@ -2,6 +2,9 @@ package com.service;
 import com.Model.SendResponse;
 import com.Model.TwitterData;
 import com.config.DropWizardConfiguration;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Service;
@@ -13,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@CacheConfig(cacheNames ={"Tweets","filters"})
 @Service
 public class Services {
     ConfigurationBuilder configurationBuilder;
@@ -42,7 +45,8 @@ public class Services {
         twitter = twitterFactory.getInstance();
     }
 
-
+    @Cacheable(cacheNames = {"Tweets"})
+    @CacheEvict(cacheNames = {"Tweets"},allEntries = true)
     public Status sendTweets(String args) throws NullPointerException, TwitterException {
         List<SendResponse> list = new ArrayList<>();
         String message;
@@ -61,7 +65,7 @@ public class Services {
         return status;
     }
 
-
+    @Cacheable(cacheNames = {"Tweets"})
     public List<TwitterData> latestTweet() {
         List<TwitterData> list = new ArrayList<>();
         try {
@@ -83,7 +87,7 @@ public class Services {
         }
         return list;
     }
-
+    @Cacheable(cacheNames = {"filters"})
     public List<TwitterData> filterTweet(String filter) throws IllegalArgumentException{
         List<TwitterData> list= latestTweet();
         int len = filter.length();
