@@ -1,6 +1,4 @@
-package Model;
-
-import java.util.Date;
+package com.Model;
 
 public class TwitterData {
     String message;

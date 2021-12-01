@@ -2,11 +2,13 @@
 package com.config;
 
 import io.dropwizard.Configuration;
+import org.springframework.context.annotation.Bean;
 import twitter4j.conf.ConfigurationBuilder;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
+@org.springframework.context.annotation.Configuration
 public class DropWizardConfiguration extends Configuration {
             String filepath="twitter4j-example.yaml";
             static String accessTokenSecret="";
@@ -31,7 +33,8 @@ public class DropWizardConfiguration extends Configuration {
                 consumerKey= properties.getProperty("consumerKey");
                 accessToken= properties.getProperty("accessToken");
             }
-    public static ConfigurationBuilder getConfigurationObject()
+            @Bean(name = "Configuration")
+            public ConfigurationBuilder getConfigurationObject()
     {
                 ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
                 configurationBuilder.setDebugEnabled(true)

@@ -1,5 +1,5 @@
 import com.resource.PostReq;
-import com.service.Service;
+import com.service.Services;
 import com.service.Tweeting;
 import org.junit.*;
 import org.junit.runner.RunWith;
@@ -20,7 +20,7 @@ public class TweetingTest {
     Tweeting tweeting;
     PostReq postReq;
     Twitter twitter;
-    Service service;
+    Services services;
     @Before
     public void setUp()  {
 
@@ -28,31 +28,30 @@ public class TweetingTest {
         twitterFactory = mock(TwitterFactory.class);
         postReq = new PostReq();
         twitter = mock(Twitter.class);
-        tweeting = new Tweeting(service);
+        tweeting = new Tweeting(services);
         twitterFactory = mock(TwitterFactory.class);
         when(twitterFactory.getInstance()).thenReturn(twitter);
-        service = new Service(twitterFactory);
+        services = new Services(twitterFactory);
 
     }
 
     @Test
     public void sendTweetTest_NotEmpty() throws TwitterException {
-        postReq.setMessage("cart");
+       postReq.setMessage("cart");
         Status s0 = mock(Status.class);
         String expectedTweet = postReq.getMessage();
         when(twitter.updateStatus(postReq.getMessage())).thenReturn(s0);
-        Status actualTweet = service.sendTweets(expectedTweet);
+        Status actualTweet = services.sendTweets(expectedTweet);
         assertEquals(s0, actualTweet);
     }
-
-@Test
+    @Test
     public void sendTweetTest_IsEmpty() throws TwitterException {
-        postReq.setMessage("");
+       postReq.setMessage("");
         Status s0 = twitter.updateStatus(postReq.getMessage());
         String expectedTweet = "";
         when(twitterFactory.getInstance()).thenReturn(twitter);
         when(twitter.updateStatus(postReq.getMessage())).thenReturn(s0);
-        Status actualTweet = service.sendTweets(expectedTweet);
+        Status actualTweet = services.sendTweets(expectedTweet);
         assertEquals(s0, actualTweet);
     }
 

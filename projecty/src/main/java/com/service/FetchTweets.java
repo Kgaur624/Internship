@@ -2,13 +2,11 @@ package com.service;
 
 public class FetchTweets {
 
-    Service service;
+    Services services;
     public FetchTweets (){}
 
-    public FetchTweets(Service service){
-        this.service = service;
+    public FetchTweets(Services services){
+        this.services = services;
     }
-
-
 
 }
