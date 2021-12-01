@@ -3,22 +3,11 @@ package com.Model;
 public class SendResponse {
    private String message;
 
-    public int getStatusCode() {
-        return statusCode;
-    }
 
-    public void setStatusCode(int statusCode) {
-        this.statusCode = statusCode;
-    }
-
-    private int statusCode;
-
-
-
-    public SendResponse(String message, int statusCode) {
+    public SendResponse(String message) {
         this.message = message;
-        this.statusCode = statusCode;
     }
+
 
     public SendResponse() {
     }
@@ -28,8 +17,9 @@ public class SendResponse {
         return message;
     }
 
-    public void setMessage(String message) {
+    public String setMessage(String message) {
         this.message = message;
+        return message;
     }
 
 }

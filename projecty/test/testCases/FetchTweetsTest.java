@@ -47,7 +47,6 @@ public class FetchTweetsTest {
     @Before
     public void setUp() {
         twitter= mock(Twitter.class);
-    //    s1=mock(Status.class);
          twitterFactory = mock(TwitterFactory.class);
         when(twitterFactory.getInstance()).thenReturn(twitter);
         twitterData = spy(new TwitterData(message, twitterHandle, name, profileImageUrl, date));
@@ -105,7 +104,7 @@ public class FetchTweetsTest {
         User user=mock(User.class);
         ResponseList<Status> responseList = mock(ResponseList.class);
         List<TwitterData> expected=spy(ArrayList.class);
-        when(responseList.size()).thenReturn(0);
+        when(responseList.size()).thenReturn(1);
         when(responseList.get(0)).thenReturn(s1);
         when(s1.getUser()).thenReturn(user);
         when(s1.getUser().getProfileImageURL()).thenReturn(profileImageUrl);
@@ -114,7 +113,7 @@ public class FetchTweetsTest {
         when(s1.getText()).thenReturn(message);
         when(s1.getCreatedAt()).thenReturn(created);
         when(twitter.getHomeTimeline()).thenReturn(responseList);
-        List<TwitterData> actualList = services.filterTweet("try");
+        List<TwitterData> actualList = services.filterTweet("kkk");
         Assert.assertEquals(expected.size(),actualList.size());
     }
 
