@@ -1,3 +1,7 @@
+
+/**
+ * This package contains the Services.
+ */
 package com.service;
 import com.Model.SendResponse;
 import com.Model.TwitterData;
@@ -7,6 +11,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
@@ -24,7 +29,11 @@ public class Services {
     Twitter twitter;
    TwitterData twitterData;
 
-    //this constructor is used for test case
+    /**
+     * this constructor is used for test case
+     *
+     * @param twitterFactory
+     */
     public Services(TwitterFactory twitterFactory) {
         this.twitterFactory = twitterFactory;
         this.twitter = this.twitterFactory.getInstance();
@@ -37,7 +46,9 @@ public class Services {
     }
 
 
-    //this constructor is used for controller class
+    /**
+     * this constructor is used for controller class
+     */
     public Services() {
         ApplicationContext context = new AnnotationConfigApplicationContext(DropWizardConfiguration.class);
         configurationBuilder=(ConfigurationBuilder)context.getBean("Configuration");
@@ -65,7 +76,14 @@ public class Services {
         return status;
     }
 
+
+    /**
+     * latestTweet() used to get tweets from user timeline.
+     *
+     * @return returns tweets to controller class.
+     */
     @Cacheable(cacheNames = {"Tweets"})
+    @Scheduled(fixedRate = 2000)
     public List<TwitterData> latestTweet() {
         List<TwitterData> list = new ArrayList<>();
         try {
@@ -87,7 +105,16 @@ public class Services {
         }
         return list;
     }
+
+
+    /**
+     * getFilteredTweets() used to get filtered tweets from user timeline.
+     *
+     * @param filter is used to search in a list of tweets.
+     * @return returns filtered tweets.
+     */
     @Cacheable(cacheNames = {"filters"})
+    @Scheduled(fixedRate = 3000)
     public List<TwitterData> filterTweet(String filter) throws IllegalArgumentException{
         List<TwitterData> list= latestTweet();
         int len = filter.length();
