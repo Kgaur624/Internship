@@ -1,7 +1,7 @@
 
 import com.Model.TwitterData;
 import com.service.FetchTweets;
-import com.service.*;
+import com.service.Services;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -53,7 +53,6 @@ public class FetchTweetsTest {
         services = new Services(twitterFactory,twitterData);
         fetchTweets=new FetchTweets(services);
     }
-
 
     @Test
     public void fetchTweetTest_successCase_listIsNotEmpty() throws TwitterException {
@@ -117,13 +116,13 @@ public class FetchTweetsTest {
         Assert.assertEquals(expected.size(),actualList.size());
     }
 
-
-
-
-
-
-
-
-
+    @Test
+    public void noTweetMatchTest() throws TwitterException {
+        ResponseList<Status> responseList = mock(ResponseList.class);
+        when(responseList.size()).thenReturn(0);
+        when(twitter.getHomeTimeline()).thenReturn(responseList);
+        List<TwitterData> actual = services.filterTweet("forest");
+        Assert.assertEquals(Arrays.asList(), actual);
+    }
 }
 
