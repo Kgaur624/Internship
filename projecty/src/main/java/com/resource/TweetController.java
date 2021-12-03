@@ -47,6 +47,7 @@ public class TweetController {
     public ResponseEntity<SendResponse> sendTweet(@RequestBody PostReq postReq) {
         try {
             String tweet = postReq.getMessage();
+            HttpHeaders responseHeaders = new HttpHeaders();
             if (StringUtils.isEmpty(tweet)) {
                 logger.error("Field is empty");
                 return new ResponseEntity(new SendResponse("Field is empty"), new HttpHeaders(), HttpStatus.BAD_REQUEST);

@@ -12,5 +12,15 @@ public class SendResponse {
 
     public SendResponse() {
     }
+    public String getMessage() {
+        return message;
+    }
+
+    public String setMessage(String message) {
+        this.message = message;
+        return message;
+    }
+
+
 }
 

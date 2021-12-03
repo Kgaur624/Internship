@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
 @CacheConfig(cacheNames ={"Tweets","filters"})
 @Service
 public class Services {
@@ -59,9 +60,6 @@ public class Services {
     @Cacheable(cacheNames = {"Tweets"})
     @CacheEvict(cacheNames = {"Tweets"},allEntries = true)
     public Status sendTweets(String args) throws NullPointerException, TwitterException {
-        List<SendResponse> list = new ArrayList<>();
-        String message;
-        String family;
         Status status = null;
         try {
             if (args.length() != 0)

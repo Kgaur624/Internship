@@ -19,7 +19,28 @@ public class TwitterData {
         this.createdAt = createdAt;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
     public String getMessage() {
         return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public String setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+        return createdAt;
     }
 }
